@@ -45,7 +45,7 @@ namespace DtuModbus
                 {
                     try
                     {
-                        var res = await mqttClient.ConnectAsync(mqttOptions);
+                        var res = await mqttClient.ConnectAsync(mqttOptions, stoppingToken);
                         var panels = await dtu.ReadPanels(numPanels).ToListAsync();
 
                         var totalPower = panels.Sum(p => p.Power);
@@ -55,8 +55,17 @@ namespace DtuModbus
                         var totalTodayProduction = panels.Sum(p => p.TodayProduction);
                         log.LogInformation($"Total today production: {totalTodayProduction} Wh");
 
-                        await mqttClient.PublishAsync(totalPowerTopic, Encoding.ASCII.GetBytes(totalPower.ToString(CultureInfo.InvariantCulture)));
-                        await mqttClient.PublishAsync(totalTodayProductionTopic, Encoding.ASCII.GetBytes(totalTodayProduction.ToString(CultureInfo.InvariantCulture)));
+                        await mqttClient.PublishAsync(new MqttApplicationMessage
+                        {
+                            Topic = totalPowerTopic,
+                            Payload = Encoding.ASCII.GetBytes(totalPower.ToString(CultureInfo.InvariantCulture))
+                        }, stoppingToken);
+
+                        await mqttClient.PublishAsync(new MqttApplicationMessage
+                        {
+                            Topic = totalTodayProductionTopic,
+                            Payload = Encoding.ASCII.GetBytes(totalTodayProduction.ToString(CultureInfo.InvariantCulture))
+                        }, stoppingToken);
 
                         log.LogDebug("Waiting for a minute before next read.");
                         await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);

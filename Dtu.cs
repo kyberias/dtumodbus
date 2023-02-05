@@ -37,7 +37,7 @@ namespace DtuModbus
             }
         }
 
-        async Task<PanelInfo> ReadPanelInfo(int panelIndex, NetworkStream stream)
+        async Task<PanelInfo> ReadPanelInfo(int panelIndex, Stream stream)
         {
             using (var cancel = new CancellationTokenSource(TimeSpan.FromSeconds(5)))
             {
@@ -76,7 +76,7 @@ namespace DtuModbus
             }
         }
 
-        async Task<byte[]> ReadRegisters(NetworkStream stream, ushort addr, byte num, CancellationToken token)
+        async Task<byte[]> ReadRegisters(Stream stream, ushort addr, byte num, CancellationToken token)
         {
             // 5.2.1 Read Single Device Status
             var msg = new byte[12];
