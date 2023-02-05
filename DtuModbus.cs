@@ -1,6 +1,4 @@
-﻿using System.Net.Sockets;
-using MQTTnet;
-using MQTTnet.Client;
+﻿using MQTTnet;
 using MQTTnet.Client.Options;
 using System.Text;
 using System.Globalization;
@@ -14,11 +12,13 @@ namespace DtuModbus
     {
         readonly ILogger<DtuModbus> log;
         readonly IConfiguration config;
+        IMqttFactory factory;
 
-        public DtuModbus(ILogger<DtuModbus> log, IConfiguration config)
+        public DtuModbus(ILogger<DtuModbus> log, IConfiguration config, IMqttFactory factory)
         {
             this.log = log;
             this.config = config;
+            this.factory = factory;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -36,7 +36,6 @@ namespace DtuModbus
 
             var numPanels = int.Parse(config["panels:numPanels"]!);
 
-            var factory = new MqttFactory();
             var dtu = new Dtu(dtuHostname, dtuPort, log);
 
             while (!stoppingToken.IsCancellationRequested)

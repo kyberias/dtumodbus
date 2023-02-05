@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MQTTnet;
 
 namespace DtuModbus
 {
@@ -17,6 +18,7 @@ namespace DtuModbus
             {
                 services.AddLogging();
                 services.AddHostedService<DtuModbus>();
+                services.AddSingleton<IMqttFactory, MqttFactory>();
             })
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
