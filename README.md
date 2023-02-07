@@ -1,3 +1,5 @@
+![Build and test](https://github.com/kyberias/dtumodbus/actions/workflows/buildandtest.yml/badge.svg)
+
 # Modbus to MQTT integration for Hoymiles DTU Pro
 
 This program reads solar panel status from Hoymiles DTU Pro and sends it to a given MQTT topic. The DTU device is polled approximately once per minute using the Modbus TCP protocol.
