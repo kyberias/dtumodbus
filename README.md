@@ -1,8 +1,14 @@
 ![Build and test](https://github.com/kyberias/dtumodbus/actions/workflows/buildandtest.yml/badge.svg)
+[![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
 # Modbus to MQTT integration for Hoymiles DTU Pro
 
-This program reads solar panel status from Hoymiles DTU Pro and sends it to a given MQTT topic. The DTU device is polled approximately once per minute using the Modbus TCP protocol.
+This program reads solar panel status from Hoymiles DTU Pro and sends it to given MQTT topics. The DTU device is polled approximately once per minute using the Modbus TCP protocol.
+
+The following data is sent:
+
+* The sum of current power (kW) of all the configured panels
+* The sum of cumulative daily energy (kWh) of all the configured panels
 
 Hoymiles DTU Pro's implementation of Modbus TCP is extremely flaky. By introducing suitable delays this programs tries to make the communication more robust.
 
@@ -22,7 +28,12 @@ The following settings are available in appsettings.json.
 |panels:numPanels|Number of panels to query.
 |Logging|Standard .NET logging settings.
 
+# Build
+
+    dotnet build
+
 # Usage
 
 Update configuration in appsettings.json and run the executable.
 
+    dotnet run
