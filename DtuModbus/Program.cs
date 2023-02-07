@@ -17,8 +17,11 @@ namespace DtuModbus
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddLogging();
-                services.AddHostedService<DtuModbus>();
+                services.AddHostedService<DtuModbusService>();
+                services.AddSingleton<IDtuModbus, HoymilesDtuModbus>();
+                services.AddSingleton<ITcpClientFactory, TcpClientFactory>();
                 services.AddSingleton<IMqttFactory, MqttFactory>();
+                services.AddSingleton<ModbusToMqtt>();
             })
             .ConfigureAppConfiguration((hostingContext, config) =>
             {

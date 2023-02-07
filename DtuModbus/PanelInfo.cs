@@ -1,6 +1,6 @@
 ﻿namespace DtuModbus
 {
-    class PanelInfo
+    public class PanelInfo
     {
         public double Power { get; set; }
         public double Voltage { get; set; }
