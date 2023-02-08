@@ -39,8 +39,8 @@ public class FakeStream : Stream
         throw new NotImplementedException();
     }
 
-    BufferBlock<byte> writeBuf = new BufferBlock<byte>();
-    BufferBlock<byte> readBuf = new BufferBlock<byte>();
+    private readonly BufferBlock<byte> writeBuf = new();
+    private readonly BufferBlock<byte> readBuf = new();
 
     public override void Write(byte[] buffer, int offset, int count)
     {

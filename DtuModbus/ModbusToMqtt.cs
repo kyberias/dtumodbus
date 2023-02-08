@@ -9,10 +9,10 @@ namespace DtuModbus
 {
     public class ModbusToMqtt
     {
-        readonly ILogger<ModbusToMqtt> log;
-        readonly IConfiguration config;
-        readonly IMqttFactory factory;
-        readonly IDtuModbus dtu;
+        private readonly ILogger<ModbusToMqtt> log;
+        private readonly IConfiguration config;
+        private readonly IMqttFactory factory;
+        private readonly IDtuModbus dtu;
 
         public ModbusToMqtt(ILogger<ModbusToMqtt> log, IConfiguration config, IMqttFactory factory, IDtuModbus dtu)
         {

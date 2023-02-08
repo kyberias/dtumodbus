@@ -4,7 +4,7 @@ namespace DtuModbus
 {
     class DtuModbusService : BackgroundService
     {
-        ModbusToMqtt programLogic;
+        readonly ModbusToMqtt programLogic;
 
         public DtuModbusService(ModbusToMqtt programLogic)
         {

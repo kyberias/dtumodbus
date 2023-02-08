@@ -10,7 +10,6 @@ The following data is sent:
 * The sum of current power (kW) of all the configured panels
 * The sum of cumulative daily energy (kWh) of all the configured panels
 
-Hoymiles DTU Pro's implementation of Modbus TCP is extremely flaky. By introducing suitable delays this programs tries to make the communication more robust.
 
 # Configuration
 
@@ -33,6 +32,8 @@ The following settings are available in appsettings.json.
     dotnet build
 
 # Usage
+
+Make sure you have at least V00.02.15 of DTU firmware since earlier versions have very unstable Modbus TCP implementation.
 
 Update configuration in appsettings.json and run the executable.
 

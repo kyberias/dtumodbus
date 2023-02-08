@@ -28,12 +28,12 @@ namespace DtuModbus
             {
                 using (var stream = client.GetStream())
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(0.5));
+                    //await Task.Delay(TimeSpan.FromSeconds(0.5));
 
                     for (int i = 0; i < numPanels; i++)
                     {
                         yield return await ReadPanelInfo(i, stream);
-                        await Task.Delay(TimeSpan.FromSeconds(1));
+                        //await Task.Delay(TimeSpan.FromSeconds(1));
                     }
                 }
             }
